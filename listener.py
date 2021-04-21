@@ -28,20 +28,32 @@ def listener(update: Update, context: CallbackContext):
     chatTitle = update.effective_message.chat.title
 
     replyToMessage = update.message.reply_to_message  # Si el mensaje está respondiendo a otro, podrás acceder a él con replyToMessage.text
+    if ('furro' in message):
+        update.effective_message.reply_text('ban por furrx')
+        print(user.username + 'ha sido echado por ser furro')
+        bot.kickChatMember(chatID, user.id)
+    elif('pecaminosa' in message or 'pecaminoso' in message):
+        update.effective_message.reply_text('echado porque si')
+        print(user.username + 'ha sido echado porque si')
+        bot.kickChatMember(chatID, user.id)
 
     if ('hola junjobot' in message):
         update.effective_message.reply_text('hola ' + user)
     elif lenWords <= 3 and re.search(r'hol[ia]', message):
         update.effective_message.reply_text('Hola!')
 
-    elif ('puta'in message):
+    elif ('puta' in message):
         update.effective_message.reply_text('Puta tu madre')
 
-    elif ('zorra'in message):
+    elif ('zorra' in message):
         update.effective_message.reply_text('Zorra tu madre')
     elif ('me cago en' in message):
         update.effective_message.reply_text('yo me cago en tus muertos pisados a caballo')
-    if ('ano'in words[lenWords-1][-3:]):
+    elif (('warrah' or 'warra') in message and lenWords == 1):
+        update.effective_message.reply_text('warrah')
+    if ('ano' in words[lenWords - 1][-3:]):
         update.effective_message.reply_text('Me la agarras con la mano')
-    elif ('inco'in message):
+    elif ('inco' in message):
         update.effective_message.reply_text('Por el culo te la hinco')
+    if ('rita' in words):
+        update.effective_message.reply_text('La zorrita')

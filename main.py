@@ -2,6 +2,7 @@
 from telegram import *  # Aquí lo estoy importando todo, pero podrías importar solo lo que necesites
 from telegram.ext import *
 from pueblo import *
+from dataBase import *
 
 import os
 import sys
@@ -16,6 +17,8 @@ import listener
 logging.basicConfig(
     format='%(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Variables del programa
 
 
 
@@ -108,20 +111,24 @@ def help(update: Update, context: CallbackContext):
     result = 'Los comandos de este bot son: \n /money (nickname) te muestra tu dinero \n /moneyTown (nickname) te muestra el dinero de tu ciudad \n /moneyRank (nickname) te muestra un ranking de mayor a menor del dinero de cada integrante de la ciudad'
     update.message.reply_text(result)
 
-def main():
+def main(version=0):
+
     #prueba()
-    updater = Updater('1738988045:AAEZwuOoUGS4GgzCqaK6POto0W9bSA5-74Y', use_context=True)  # El TOKEN de BotFather
+    if version == 0:
+        updater = Updater('1738988045:AAEZwuOoUGS4GgzCqaK6POto0W9bSA5-74Y', use_context=True)  # El TOKEN de BotFather
+    else:
+        updater = Updater('1773961023:AAFlIJkxglNipQ0HwOsPM-d2l9wwBFsxav0', use_context=True)
 
     j = updater.job_queue  # Si necesitas pasarle el job_queue a alguna función, aquí lo tienes
     dp = updater.dispatcher  # No tienes que tocar esto
 
+    baseInit()
+    print(mapaUsuarios)
     def addC(filter, handler, **args):  # Esto lo he creado por comodidad
         dp.add_handler(CommandHandler(filter, handler, **args))
 
     def addM(filter, handler, **args):  # Esto lo he creado por comodidad
         dp.add_handler(MessageHandler(filter, handler, **args))
-
-
 
     # dp.add_handler(CallbackQueryHandler(button.button, pass_job_queue=True)) - Otros ejemplos
     # dp.add_handler(InlineQueryHandler(inline.inlinequery)) - Otros ejemplos
@@ -135,7 +142,9 @@ def main():
     addC('moneyTown',moneyCity,run_async=True)
     addC('onlineTown',onlineTown,run_async=True)
     addC('help',help,run_async=True)
-
+    addC('register',registerUser,run_async=True)
+    addC('paja',contador,run_async=True)
+    addC('pinfo',contadorInfo,run_async=True)
     addM(Filters.text, listener.listener, run_async=True)  # En este caso le llegan los mensajes de texto a la función listener del módulo listener
 
 
@@ -169,4 +178,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) > 1:
+        main(sys.argv[1])
+    else:
+        main()

@@ -26,12 +26,14 @@ def listener(update: Update, context: CallbackContext):
     words = message.replace('?', '').replace(',', '').replace('!', '').split()
     lenWords = len(words)
     chatTitle = update.effective_message.chat.title
-
     replyToMessage = update.message.reply_to_message  # Si el mensaje está respondiendo a otro, podrás acceder a él con replyToMessage.text
+
     if ('furro' in message):
+        # permisos = ChatPermissions(can_send_messages=False, can_send_media_messages=False, can_send_polls=False, can_send_other_messages=False, can_add_web_page_previews=False, can_change_info=False, can_invite_users=False, can_pin_messages=False)
         update.effective_message.reply_text('ban por furrx')
-        print(user.username + 'ha sido echado por ser furro')
+        bot.promoteChatMember(chatID, user.id, can_change_info=False, can_post_messages=False, can_edit_messages=False, can_delete_messages=False, can_invite_users=False, can_restrict_members=False, can_pin_messages=False, can_promote_members=False, is_anonymous=False, can_manage_chat=False, can_manage_voice_chats=False)
         bot.kickChatMember(chatID, user.id)
+        print(user.username + 'ha sido echado por ser furro')
     elif('pecaminosa' in message or 'pecaminoso' in message):
         update.effective_message.reply_text('echado porque si')
         print(user.username + 'ha sido echado porque si')
@@ -41,8 +43,10 @@ def listener(update: Update, context: CallbackContext):
         update.effective_message.reply_text('hola ' + user)
     elif lenWords <= 3 and re.search(r'hol[ia]', message):
         update.effective_message.reply_text('Hola!')
+    elif('adios' in message):
+        update.effective_message.reply_text('bueno adios master')
 
-    elif ('puta' in message):
+    elif ('puta' in words):
         update.effective_message.reply_text('Puta tu madre')
 
     elif ('zorra' in message):

@@ -1,6 +1,7 @@
 from telegram import *
 from telegram.ext import *
 from telegram.ext.dispatcher import run_async
+from spellingChecker import *
 import re
 
 
@@ -22,7 +23,7 @@ def listener(update: Update, context: CallbackContext):
 
     message = message.lower()
     # message = eliminarTildes(message)
-    # message = spellingChecker(message)
+    message = spellingChecker(message)
     words = message.replace('?', '').replace(',', '').replace('!', '').split()
     lenWords = len(words)
     chatTitle = update.effective_message.chat.title
@@ -38,9 +39,10 @@ def listener(update: Update, context: CallbackContext):
         update.effective_message.reply_text('echado porque si')
         print(user.username + 'ha sido echado porque si')
         bot.kickChatMember(chatID, user.id)
-
     if ('hola junjobot' in message):
-        update.effective_message.reply_text('hola ' + user)
+        update.effective_message.reply_text('hola ' + user.username)
+    elif ('junjobot gilipollas' in message):
+        update.effective_message.reply_text('a insultar a tu madre, ' + user.username)
     elif lenWords <= 3 and re.search(r'hol[ia]', message):
         update.effective_message.reply_text('Hola!')
     elif('adios' in message):
@@ -59,5 +61,5 @@ def listener(update: Update, context: CallbackContext):
         update.effective_message.reply_text('Me la agarras con la mano')
     elif ('inco' in message):
         update.effective_message.reply_text('Por el culo te la hinco')
-    if ('rita' in words):
+    elif ('rita' in words):
         update.effective_message.reply_text('La zorrita')

@@ -41,7 +41,7 @@ def listener(update: Update, context: CallbackContext):
         bot.kickChatMember(chatID, user.id)
     if ('hola junjobot' in message):
         update.effective_message.reply_text('hola ' + user.username)
-    elif ('junjobot gilipollas' in message):
+    elif ('junjobot gilipollas' in message or 'gilipollas junjobot'):
         update.effective_message.reply_text('a insultar a tu madre, ' + user.username)
     elif lenWords <= 3 and re.search(r'hol[ia]', message):
         update.effective_message.reply_text('Hola!')

@@ -61,3 +61,16 @@ def contadorInfo(update: Update, context: CallbackContext):
     user = update.effective_message.from_user
     counter = mapaUsuarios[user.username].get('count')
     update.message.reply_text(f'llevas {counter} pajas')
+
+
+def registrarMinecraft(update: Update, context: CallbackContext):
+    user = update.effective_message.from_user
+    args = context.args
+    db = firestore.client()
+    try:
+        db.collection('Users').document(user.username).update({'minecraftName': args[0]})
+        mapaUsuarios[user.username]['minecraftName'] = args[0]
+        update.message.reply_text('se ha registrado correctamente')
+    except Exception as e:
+        print(e)
+        update.message.reply_text('ha ocurrido un error')

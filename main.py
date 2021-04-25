@@ -21,7 +21,6 @@ logger = logging.getLogger(__name__)
 # Variables del programa
 
 
-
 def start(update: Update, context: CallbackContext):
     bot = context.bot
     args = context.args
@@ -56,22 +55,26 @@ def d(update: Update, context: CallbackContext):
             result = 'ERROR 🐡'
     update.message.reply_text(result)
 
+
 def moneyRank(update: Update, context: CallbackContext):
     args = context.args
+    user = update.effective_message.from_user
     if not args:
         result = 'el comando /moneyRank necesita el campo (nickname)'
+        dictionaty = moneyRankDic(mapaUsuarios[user.username].get('minecraftName'))
     else:
-        try:
-            dictionaty = moneyRankDic(args[0])
+        dictionaty = moneyRankDic(args[0])
+    try:
 
-            result = ''
+        result = ''
 
-            for key in dictionaty:
-                result += key + ' ' + str(dictionaty.get(key)) + "\n"
-        except:
-            result = 'ERROR 🐡'
+        for key in dictionaty:
+            result += key + ' ' + str(dictionaty.get(key)) + "\n"
+    except:
+        result = 'ERROR 🐡'
 
     update.message.reply_text(result)
+
 
 def money(update: Update, context: CallbackContext):
     'Función que devuelve tu dinero'
@@ -81,7 +84,11 @@ def money(update: Update, context: CallbackContext):
     user = update.effective_message.from_user
     chatID = update.effective_message.chat_id
     if not args:
-        update.message.reply_text('El comando /money necesita el campo (nickname)')
+        try:
+            result = getDinero(mapaUsuarios[user.username].get('minecraftName'))
+        except Exception as e:
+            result = 'ERROR 🐡'
+            print(f'ERROR EN MONEY: {e}')
     else:
         try:
             print(args[0])
@@ -89,7 +96,8 @@ def money(update: Update, context: CallbackContext):
         except Exception as e:
             result = 'ERROR 🐡'
             print(f'ERROR EN MONEY: {e}')
-        update.message.reply_text(result)
+    update.message.reply_text(result)
+
 
 def error(update: Update, context: CallbackContext):
     logger.warning('Update "%s" caused error "%s"', update, error)
@@ -111,9 +119,10 @@ def help(update: Update, context: CallbackContext):
     result = 'Los comandos de este bot son: \n /money (nickname) te muestra tu dinero \n /moneyTown (nickname) te muestra el dinero de tu ciudad \n /moneyRank (nickname) te muestra un ranking de mayor a menor del dinero de cada integrante de la ciudad'
     update.message.reply_text(result)
 
+
 def main(version=0):
 
-    #prueba()
+    # prueba()
     if version == 0:
         updater = Updater('1738988045:AAEZwuOoUGS4GgzCqaK6POto0W9bSA5-74Y', use_context=True)  # El TOKEN de BotFather
     else:
@@ -124,6 +133,7 @@ def main(version=0):
 
     baseInit()
     print(mapaUsuarios)
+
     def addC(filter, handler, **args):  # Esto lo he creado por comodidad
         dp.add_handler(CommandHandler(filter, handler, **args))
 
@@ -136,18 +146,17 @@ def main(version=0):
     # Con pass_args le indicas que quieres los parámetros que se le pasen a /start
 
     # Con edited_updates recibirás también los updates de los mensajes editados
-    #addC('d', d, run_async=True)
+    # addC('d', d, run_async=True)
     addC('money', money, run_async=True)
-    addC('moneyRank',moneyRank,run_async=True)
-    addC('moneyTown',moneyCity,run_async=True)
-    addC('onlineTown',onlineTown,run_async=True)
-    addC('help',help,run_async=True)
-    addC('register',registerUser,run_async=True)
-    addC('paja',contador,run_async=True)
-    addC('pinfo',contadorInfo,run_async=True)
+    addC('moneyRank', moneyRank, run_async=True)
+    addC('moneyTown', moneyCity, run_async=True)
+    addC('onlineTown', onlineTown, run_async=True)
+    addC('help', help, run_async=True)
+    addC('register', registerUser, run_async=True)
+    addC('paja', contador, run_async=True)
+    addC('pinfo', contadorInfo, run_async=True)
+    addC('registerMinecraft', registrarMinecraft, run_async=True)
     addM(Filters.text, listener.listener, run_async=True)  # En este caso le llegan los mensajes de texto a la función listener del módulo listener
-
-
 
     def stop_and_restart():
         updater.stop()
@@ -164,7 +173,7 @@ def main(version=0):
     '''
 
     # log all errors
-    #dp.add_error_handler(error)
+    # dp.add_error_handler(error)
 
     addM(Filters.all, otherUpdates)
 

@@ -22,7 +22,7 @@ def listener(update: Update, context: CallbackContext):
     priv = chatID > 0
 
     message = message.lower()
-    # message = eliminarTildes(message)
+    message = eliminarTildes(message)
     message = spellingChecker(message)
     words = message.replace('?', '').replace(',', '').replace('!', '').split()
     lenWords = len(words)
@@ -35,11 +35,16 @@ def listener(update: Update, context: CallbackContext):
     # bot.promoteChatMember(chatID, user.id, can_change_info=False, can_post_messages=False, can_edit_messages=False, can_delete_messages=False, can_invite_users=False, can_restrict_members=False, can_pin_messages=False, can_promote_members=False, is_anonymous=False, can_manage_chat=False, can_manage_voice_chats=False)
     # bot.kickChatMember(chatID, user.id)
     # print(user.username + 'ha sido echado por ser furro')
+    global puta
+    if puta and 'si' in message:
+        puta = False
+        update.effective_message.reply_text('tu putamadregonzalohojodeputasufgreleyendoesto cabron')
     if('pecaminosa' in message or 'pecaminoso' in message):
         update.effective_message.reply_text('echado porque si')
         print(user.username + 'ha sido echado porque si')
         bot.kickChatMember(chatID, user.id)
     if ('hola junjobot' in message):
+        puta = True
         update.effective_message.reply_text('hola ' + user.username)
     elif ('junjobot gilipollas' in message or 'gilipollas junjobot' in message):
         update.effective_message.reply_text('a insultar a tu madre, ' + user.username)

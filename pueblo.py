@@ -87,15 +87,16 @@ def moneyRankDic(nickname):
 
 def moneyCity(update: Update, context: CallbackContext):
     args = context.args
-
+    user = update.effective_message.from_user
     if not args:
         respuesta = 'tienes que escribir /moneyTown (username)'
+        dictionary = getFiumcraft(mapaUsuarios[user.username].get('minecraftName'))
     else:
-        try:
-            dictionary = getFiumcraft(args[0])
-            respuesta = str(dictionary.get('moneyInBank'))
-        except:
-            respuesta = 'error 🐡'
+        dictionary = getFiumcraft(args[0])
+    try:
+        respuesta = str(dictionary.get('moneyInBank')) + ' €'
+    except:
+        respuesta = 'error 🐡'
     update.message.reply_text(respuesta)
 
 

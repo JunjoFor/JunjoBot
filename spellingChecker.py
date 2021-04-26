@@ -8,5 +8,5 @@ def spellingChecker(message):
 
 
 def eliminarTildes(message):
-    resultado = message.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
+    resultado = message.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u').replace('ü', 'u')
     return resultado

@@ -64,7 +64,7 @@ def listener(update: Update, context: CallbackContext):
         update.effective_message.reply_text('warrah')
     if ('ano' in words[lenWords - 1][-3:]):
         update.effective_message.reply_text('Me la agarras con la mano')
-    elif ('inco' in message):
+    elif ('inco' in message or '5' in message):
         update.effective_message.reply_text('Por el culo te la hinco')
     elif ('rita' in words):
         update.effective_message.reply_text('La zorrita')

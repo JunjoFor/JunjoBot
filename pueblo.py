@@ -55,7 +55,7 @@ def onlineTown(update: Update, context: CallbackContext):
     user = update.effective_message.from_user
     if not args:
         respuesta = 'tienes que escribir /onlineTown (username)'
-        lista = getOnlineTownList(mapaUsuarios[user.username].get('minecraftName'))
+        lista = getOnlineTownList(mapaUsuarios[user.id].get('minecraftName'))
     else:
         respuesta = 'Estan online los siguientes jugadores:\n'
         lista = getOnlineTownList(args[0])
@@ -90,7 +90,7 @@ def moneyCity(update: Update, context: CallbackContext):
     user = update.effective_message.from_user
     if not args:
         respuesta = 'tienes que escribir /moneyTown (username)'
-        dictionary = getFiumcraft(mapaUsuarios[user.username].get('minecraftName'))
+        dictionary = getFiumcraft(mapaUsuarios[user.id].get('minecraftName'))
     else:
         dictionary = getFiumcraft(args[0])
     try:

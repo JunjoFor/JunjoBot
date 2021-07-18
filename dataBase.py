@@ -21,7 +21,7 @@ def baseInit():
     docs = users_ref.stream()
 
     for doc in docs:
-        mapaUsuarios[doc.to_dict().get('name')] = (doc.to_dict())
+        mapaUsuarios[doc.to_dict().get('id')] = (doc.to_dict())
 
     return mapaUsuarios
 
@@ -35,9 +35,9 @@ def registerUser(update: Update, context: CallbackContext):
         'name': user.username
     }
     try:
-        db.collection('Users').document(user.username).set(data)
+        db.collection('Users').document(user.id).set(data)
         update.message.reply_text('Se ha registrado con éxito')
-        mapaUsuarios[user.username] = data
+        mapaUsuarios[user.id] = data
     except Exception as e:
         print(e)
         update.message.reply_text('Error')
@@ -46,11 +46,11 @@ def registerUser(update: Update, context: CallbackContext):
 def contador(update: Update, context: CallbackContext):
     user = update.effective_message.from_user
     db = firestore.client()
-    counter = mapaUsuarios[user.username].get('count') + 1
-    mapaUsuarios[user.username]['count'] = counter
+    counter = mapaUsuarios[user.id].get('count') + 1
+    mapaUsuarios[user.id]['count'] = counter
     try:
-        db.collection('Users').document(user.username).update({'count': counter})
-        mapaUsuarios[user.username]['count'] = counter
+        db.collection('Users').document(user.id).update({'count': counter})
+        mapaUsuarios[user.id]['count'] = counter
         update.message.reply_text(f'ahora su contador es de {counter}')
     except Exception as e:
         print(e)
@@ -59,7 +59,7 @@ def contador(update: Update, context: CallbackContext):
 
 def contadorInfo(update: Update, context: CallbackContext):
     user = update.effective_message.from_user
-    counter = mapaUsuarios[user.username].get('count')
+    counter = mapaUsuarios[user.id].get('count')
     update.message.reply_text(f'llevas {counter} pajas')
 
 
@@ -68,8 +68,8 @@ def registrarMinecraft(update: Update, context: CallbackContext):
     args = context.args
     db = firestore.client()
     try:
-        db.collection('Users').document(user.username).update({'minecraftName': args[0]})
-        mapaUsuarios[user.username]['minecraftName'] = args[0]
+        db.collection('Users').document(user.id).update({'minecraftName': args[0]})
+        mapaUsuarios[user.id]['minecraftName'] = args[0]
         update.message.reply_text('se ha registrado correctamente')
     except Exception as e:
         print(e)

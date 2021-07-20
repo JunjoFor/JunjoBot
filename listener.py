@@ -70,3 +70,5 @@ def listener(update: Update, context: CallbackContext):
         update.effective_message.reply_text('La zorrita')
     elif 'ino' in words[lenWords - 1][-3:]:
         update.effective_message.reply_text('En tu culo mi pepino')
+    elif 'trece' in words[lenWords - 1][-5:]:
+        update.effective_message.reply_text('Agarramela que me crece')

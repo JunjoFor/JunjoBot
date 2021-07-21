@@ -57,6 +57,20 @@ def contador(update: Update, context: CallbackContext):
         update.message.reply_text('ha ocurrido un error')
 
 
+def contadorMenos(update: Update, context: CallbackContext):
+    user = update.effective_message.from_user
+    db = firestore.client()
+    counter = mapaUsuarios[user.id].get('count') - 1
+    mapaUsuarios[user.id]['count'] = counter
+    try:
+        db.collection('Users').document(str(user.id)).update({'count': counter})
+        mapaUsuarios[user.id]['count'] = counter
+        update.message.reply_text(f'ahora su contador es de {counter}')
+    except Exception as e:
+        print(e)
+        update.message.reply_text('ha ocurrido un error')
+
+
 def contadorInfo(update: Update, context: CallbackContext):
     user = update.effective_message.from_user
     counter = mapaUsuarios[user.id].get('count')

@@ -35,7 +35,7 @@ def registerUser(update: Update, context: CallbackContext):
         'name': user.username
     }
     try:
-        db.collection('Users').document(user.id).set(data)
+        db.collection('Users').document(str(user.id)).set(data)
         update.message.reply_text('Se ha registrado con éxito')
         mapaUsuarios[user.id] = data
     except Exception as e:
@@ -49,7 +49,7 @@ def contador(update: Update, context: CallbackContext):
     counter = mapaUsuarios[user.id].get('count') + 1
     mapaUsuarios[user.id]['count'] = counter
     try:
-        db.collection('Users').document(user.id).update({'count': counter})
+        db.collection('Users').document(str(user.id)).update({'count': counter})
         mapaUsuarios[user.id]['count'] = counter
         update.message.reply_text(f'ahora su contador es de {counter}')
     except Exception as e:
@@ -68,7 +68,7 @@ def registrarMinecraft(update: Update, context: CallbackContext):
     args = context.args
     db = firestore.client()
     try:
-        db.collection('Users').document(user.id).update({'minecraftName': args[0]})
+        db.collection('Users').document(str(user.id)).update({'minecraftName': args[0]})
         mapaUsuarios[user.id]['minecraftName'] = args[0]
         update.message.reply_text('se ha registrado correctamente')
     except Exception as e:

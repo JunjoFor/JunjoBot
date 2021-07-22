@@ -6,6 +6,8 @@ import re
 
 contador = 0
 
+# Podría venirme bien utilizar Pycairo
+
 
 def listener(update: Update, context: CallbackContext):
 
@@ -44,6 +46,10 @@ def listener(update: Update, context: CallbackContext):
         update.effective_message.reply_text('echado porque si')
         print(user.username + 'ha sido echado porque si')
         bot.kickChatMember(chatID, user.id)
+    if 'eduardo' in message:
+        bot.send_photo(chatID, open('./eduardo.png', 'rb'))
+    elif 'depression' in message:
+        bot.send_photo(chatID, open('./depression.jpg', 'rb'))
     if ('hola junjobot' in message):
         update.effective_message.reply_text('hola ' + user.username)
     elif ('junjobot gilipollas' in message or 'gilipollas junjobot' in message):
@@ -55,9 +61,9 @@ def listener(update: Update, context: CallbackContext):
 
     elif ('puta' in words):
         update.effective_message.reply_text('Puta tu madre')
-
     elif ('zorra' in message):
         update.effective_message.reply_text('Zorra tu madre')
+
     elif ('me cago en' in message):
         update.effective_message.reply_text('yo me cago en tus muertos pisados a caballo')
     elif (('warrah' or 'warra') in message and lenWords == 1):

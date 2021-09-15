@@ -42,6 +42,7 @@ def listener(update: Update, context: CallbackContext):
     # bot.promoteChatMember(chatID, user.id, can_change_info=False, can_post_messages=False, can_edit_messages=False, can_delete_messages=False, can_invite_users=False, can_restrict_members=False, can_pin_messages=False, can_promote_members=False, is_anonymous=False, can_manage_chat=False, can_manage_voice_chats=False)
     # bot.kickChatMember(chatID, user.id)
     # print(user.username + 'ha sido echado por ser furro')
+
     if('pecaminosa' in message or 'pecaminoso' in message):
         update.effective_message.reply_text('echado porque si')
         print(user.username + 'ha sido echado porque si')
@@ -52,6 +53,8 @@ def listener(update: Update, context: CallbackContext):
         bot.send_photo(chatID, open('./depression.jpg', 'rb'))
     if ('hola junjobot' in message):
         update.effective_message.reply_text('hola ' + user.username)
+    elif user.username == "juanyisus":
+        pass
     elif ('junjobot gilipollas' in message or 'gilipollas junjobot' in message):
         update.effective_message.reply_text('a insultar a tu madre, ' + user.username)
     elif lenWords <= 3 and re.search(r'hol[ia]', message):

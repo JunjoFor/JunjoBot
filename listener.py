@@ -3,7 +3,7 @@ from telegram.ext import *
 from telegram.ext.dispatcher import run_async
 from spellingChecker import *
 import re
-
+from dataBase import *
 contador = 0
 
 # Podría venirme bien utilizar Pycairo
@@ -42,18 +42,23 @@ def listener(update: Update, context: CallbackContext):
     # bot.promoteChatMember(chatID, user.id, can_change_info=False, can_post_messages=False, can_edit_messages=False, can_delete_messages=False, can_invite_users=False, can_restrict_members=False, can_pin_messages=False, can_promote_members=False, is_anonymous=False, can_manage_chat=False, can_manage_voice_chats=False)
     # bot.kickChatMember(chatID, user.id)
     # print(user.username + 'ha sido echado por ser furro')
-
+    if('hola' in message and priv):
+        update.effective_message.reply_text('hola ' + user.username)
     if('pecaminosa' in message or 'pecaminoso' in message):
         update.effective_message.reply_text('echado porque si')
         print(user.username + 'ha sido echado porque si')
         bot.kickChatMember(chatID, user.id)
+    if('todo mal' in message):
+        bot.send_voice(chatID, open('./todoMal.ogg', 'rb'))
     if 'eduardo' in message:
         bot.send_photo(chatID, open('./eduardo.png', 'rb'))
+    if('urraca' in message):
+        bot.send_voice(chatID, open('./urraca.ogg'))
     elif 'depression' in message:
         bot.send_photo(chatID, open('./depression.jpg', 'rb'))
     if ('hola junjobot' in message):
         update.effective_message.reply_text('hola ' + user.username)
-    elif user.username == "juanyisus":
+    elif user.username == "junjou" or user.username in mapaUsuarios.name:
         pass
     elif ('junjobot gilipollas' in message or 'gilipollas junjobot' in message):
         update.effective_message.reply_text('a insultar a tu madre, ' + user.username)

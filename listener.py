@@ -50,6 +50,8 @@ def listener(update: Update, context: CallbackContext):
         bot.kickChatMember(chatID, user.id)
     if('todo mal' in message):
         bot.send_voice(chatID, open('./todoMal.ogg', 'rb'))
+    if('nomura' in message):
+        update.effective_message.reply_text('Nomura cabrón')
     if 'eduardo' in message:
         bot.send_photo(chatID, open('./eduardo.png', 'rb'))
     if('urraca' in message):

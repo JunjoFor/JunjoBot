@@ -12,7 +12,6 @@ contador = 0
 def listener(update: Update, context: CallbackContext):
 
     global contador
-
     bot = context.bot
     args = context.args
     user = update.effective_message.from_user
@@ -50,6 +49,8 @@ def listener(update: Update, context: CallbackContext):
         bot.kickChatMember(chatID, user.id)
     if('todo mal' in message):
         bot.send_voice(chatID, open('./todoMal.ogg', 'rb'))
+    if ('sexo' in message):
+        bot.send_video(chatID, open('./sexo.mp4', 'rb'))
     if('nomura' in message):
         update.effective_message.reply_text('Nomura cabrón')
     if 'eduardo' in message:

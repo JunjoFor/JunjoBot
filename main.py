@@ -167,7 +167,7 @@ def main(version=0):
         update.message.reply_text('Restarting')
         Thread(target=stop_and_restart).start()
 
-    addC('restart', restart, filters=Filters.user(username='@juanyisus'))
+    addC('restart', restart, filters=Filters.user(username='@junjou'))
     '''
     Con este filtro limitas que esa función solo pueda ser usada por tu username
     (aunque yo siempre hago una comprobación manual del ID dentro de la función)

@@ -61,7 +61,7 @@ def listener(update: Update, context: CallbackContext):
         bot.send_photo(chatID, open('./depression.jpg', 'rb'))
     if ('hola junjobot' in message):
         update.effective_message.reply_text('hola ' + user.username)
-    elif user.username == "junjou" or user.username in mapaUsuarios.name:
+    if user.username == "junjou" or user.username in mapaUsuarios.name:
         pass
     elif ('junjobot gilipollas' in message or 'gilipollas junjobot' in message):
         update.effective_message.reply_text('a insultar a tu madre, ' + user.username)

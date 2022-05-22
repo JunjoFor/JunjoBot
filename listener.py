@@ -43,6 +43,8 @@ def listener(update: Update, context: CallbackContext):
     # print(user.username + 'ha sido echado por ser furro')
     if('hola' in message and priv):
         update.effective_message.reply_text('hola ' + user.username)
+    elif ('hola junjobot' in message):
+        update.effective_message.reply_text('hola ' + user.username)
     if('pecaminosa' in message or 'pecaminoso' in message):
         update.effective_message.reply_text('echado porque si')
         print(user.username + 'ha sido echado porque si')
@@ -59,33 +61,29 @@ def listener(update: Update, context: CallbackContext):
         bot.send_voice(chatID, open('./urraca.ogg'))
     elif 'depression' in message:
         bot.send_photo(chatID, open('./depression.jpg', 'rb'))
-    if ('hola junjobot' in message):
-        update.effective_message.reply_text('hola ' + user.username)
-    if user.username == "junjou" or user.username in mapaUsuarios.name:
-        pass
-    elif ('junjobot gilipollas' in message or 'gilipollas junjobot' in message):
-        update.effective_message.reply_text('a insultar a tu madre, ' + user.username)
-    elif lenWords <= 3 and re.search(r'hol[ia]', message):
-        update.effective_message.reply_text('Hola!')
-    elif('adios' in message):
-        update.effective_message.reply_text('bueno adios master')
+    
+    if not user.username == "junjou":
+        if ('junjobot gilipollas' in message or 'gilipollas junjobot' in message):
+            update.effective_message.reply_text('a insultar a tu madre, ' + user.username)
+        elif('adios' in message):
+            update.effective_message.reply_text('bueno adios master')
 
-    elif ('puta' in words):
-        update.effective_message.reply_text('Puta tu madre')
-    elif ('zorra' in message):
-        update.effective_message.reply_text('Zorra tu madre')
+        elif ('puta' in words):
+            update.effective_message.reply_text('Puta tu madre')
+        elif ('zorra' in message):
+            update.effective_message.reply_text('Zorra tu madre')
 
-    elif ('me cago en' in message):
-        update.effective_message.reply_text('yo me cago en tus muertos pisados a caballo')
-    elif (('warrah' or 'warra') in message and lenWords == 1):
-        update.effective_message.reply_text('warrah')
-    elif ('ano' in words[lenWords - 1][-3:]):
-        update.effective_message.reply_text('Me la agarras con la mano')
-    elif ('cinco' in words[lenWords - 1][-5:]):
-        update.effective_message.reply_text('Por el culo te la hinco')
-    elif ('rita' in words[lenWords - 1][-4:]):
-        update.effective_message.reply_text('La zorrita')
-    elif 'ino' in words[lenWords - 1][-3:]:
-        update.effective_message.reply_text('En tu culo mi pepino')
-    elif 'trece' in words[lenWords - 1][-5:]:
-        update.effective_message.reply_text('Agarramela que me crece')
+        elif ('me cago en' in message):
+            update.effective_message.reply_text('yo me cago en tus muertos pisados a caballo')
+        elif (('warrah' or 'warra') in message and lenWords == 1):
+            update.effective_message.reply_text('warrah')
+        elif ('ano' in words[lenWords - 1][-3:]):
+            update.effective_message.reply_text('Me la agarras con la mano')
+        elif ('cinco' in words[lenWords - 1][-5:]):
+            update.effective_message.reply_text('Por el culo te la hinco')
+        elif ('rita' in words[lenWords - 1][-4:]):
+            update.effective_message.reply_text('La zorrita')
+        elif 'ino' in words[lenWords - 1][-3:]:
+            update.effective_message.reply_text('En tu culo mi pepino')
+        elif 'trece' in words[lenWords - 1][-5:]:
+            update.effective_message.reply_text('Agarramela que me crece')

@@ -1,7 +1,7 @@
 
 
 def spellingChecker(message):
-    resultado = message.replace('subnormal', 'gilipollas').replace('imbecil', 'gilipollas').replace('retrasado', 'gilipollas')
+    resultado = message.replace('subnormal', 'gilipollas').replace('imbecil', 'gilipollas').replace('retrasado', 'gilipollas').replace('tonto', 'gilipollas')
     return resultado
 
 
